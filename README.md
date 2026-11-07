@@ -8,3 +8,9 @@ an AI-powered, end-to-end LPR system to automate the detection and reporting of 
 Although license plate recognition systems exist, many struggle with real-world conditions and realtime constraints. There is a need for an AI-driven LPR system that recognizes license plates in realtime on edge devices. The objective of this work is to develop a deep learning-based LPR embedded system that can detect and recognize license plates from real-time video or images. Provide
 instant alerts in case a match is found. The system will be implemented in an embedded device
 that can be a GPU, TPU or FPGA allowing the design of a low-cost system with low-latency, highthroughput, and low-energy
+
+
+### Pipeline Demonstration
+<video src="assets/traffic_output.mp4" controls="controls" style="max-width: 100%;">
+</video>
+*(Sample test video sourced from Pexels).*
