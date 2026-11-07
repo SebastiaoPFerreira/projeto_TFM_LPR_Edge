@@ -18,6 +18,23 @@ https://github.com/user-attachments/assets/928ab38b-9235-4f7e-93aa-de833ade606f
   <img src="assets/6900ma.png" width="400">
 </p>
 
+## Hardware & Architecture
+The system is designed for and evaluated on the **Khadas VIM3** single-board computer (Amlogic A311D SoC), leveraging both its ARM CPU cluster and its 5.0 TOPS Neural Processing Unit (NPU).
+
+* **Detection Stage (YOLOv8n):** Accelerated on the Khadas VIM3 NPU using the KSNN API. The model was quantized to FP16 using the Khadas Acuity Toolkit.
+* **Post-Processing (CPU):** Feature map decoding, confidence filtering (0.60), Non-Maximum Suppression (IoU 0.50), and Region of Interest (RoI) cropping.
+* **Recognition Stage (PaddleOCR PP-OCRv4 Mobile):** Executed on the ARM Cortex-A73/A53 CPU cluster via ONNX Runtime. The graph was modified to replace unsupported `hard_swish` activations with Opset-11 compatible primitives.
+* **Text Decoding (CPU):** Greedy CTC decoding with a 0-index blank token mapping, followed by regex-based syntactical filtering (`[^A-Z0-9]`).
+
+---
+
+## Datasets & Performance Metrics
+
+### Datasets
+* **Full Evaluation Dataset:** The full held-out test sets used for the thesis evaluation (800 detection images and 734 recognition crops) are too large to host directly in the source code. 
+   **[Download the Full Dataset Here](https://drive.google.com/drive/folders/1edUpIwvIfuguPaMJYqGQvNhRRVkxyZCL?usp=sharing)**
+* **Sample Data:** For quick testing, a small set of sample images and a test video are included in the `data/` directory.
+
 ## Installation
 
 **1. Clone the repository:**
@@ -44,7 +61,7 @@ The entire ALPR pipeline is consolidated into a single executable script: `pipel
 python pipeline.py \
   --library models/libnn_yolov8n.so \
   --model models/yolov8n_fp16.nb \
-  --ocr_onnx models/paddleocr_v4_mobile_opset11.onnx \
+  --ocr_onnx models/paddleocr.onnx \
   --folder data/sample_images/ \
   --output ./output_results
 ```
@@ -54,8 +71,8 @@ python pipeline.py \
 python pipeline.py \
   --library models/libnn_yolov8n.so \
   --model models/yolov8n_fp16.nb \
-  --ocr_onnx models/paddleocr_v4_mobile_opset11.onnx \
-  --source data/test_videos/pexels_traffic.mp4 \
+  --ocr_onnx models/paddleocr.onnx \
+  --source data/test_video/sample_traffic.mp4 \
   --output ./output_results
 ```
 
@@ -64,7 +81,7 @@ python pipeline.py \
 python pipeline.py \
   --library models/libnn_yolov8n.so \
   --model models/yolov8n_fp16.nb \
-  --ocr_onnx models/paddleocr_v4_mobile_opset11.onnx \
+  --ocr_onnx models/paddleocr.onnx \
   --source 0 \
   --output ./output_results
 ```
