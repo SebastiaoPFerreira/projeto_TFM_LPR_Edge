@@ -12,8 +12,6 @@ that can be a GPU, TPU or FPGA allowing the design of a low-cost system with low
 
 ### Pipeline Demonstration
 
-<video src="assets/traffic_output.mp4" controls="controls" style="max-width: 100%;">
-  Your browser does not support the video tag.
-</video>
+https://github.com/user-attachments/assets/928ab38b-9235-4f7e-93aa-de833ade606f
 
 *(Sample test video sourced from Pexels).*
