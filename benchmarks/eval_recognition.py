@@ -23,13 +23,13 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--ocr_onnx", required=True, help="Path to OCR .onnx file")
     parser.add_argument("--folder", required=True, help="Path to folder containing cropped plate images")
+    parser.add_argument("--dict_path", required=True, help="Path to dictionary file")
     args = parser.parse_args()
 
     ocr_session = ort.InferenceSession(args.ocr_onnx, providers=['CPUExecutionProvider'])
     ocr_input_name = ocr_session.get_inputs()[0].name
     
-    dict_path = 'utils/en_dict.txt'
-    with open(dict_path, 'r', encoding='utf-8') as f:
+    with open(args.dict_path, 'r', encoding='utf-8') as f:
         char_list = [line.strip('\n') for line in f.readlines()]
     char_list.append(' ')
     char_list.insert(0, '')
