@@ -15,7 +15,10 @@ https://github.com/user-attachments/assets/928ab38b-9235-4f7e-93aa-de833ade606f
 **Example Outputs:**
 ![Success Case 1](assets/0506ej.png) 
 ![Success Case 2](assets/6900ma.png)
-
+<p align="center">
+  <img src="assets/0506ej.png" width="400">
+  <img src="assets/6900ma.png" width="400">
+</p>
 
 ## Installation
 
